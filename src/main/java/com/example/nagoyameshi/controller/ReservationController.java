@@ -61,11 +61,8 @@ public class ReservationController {
 		// ログインしているユーザーを取得
 		User user = userDetailsImpl.getUser();
 
-		// ユーザーの予約情報を取得し、ページングを適用
-		Page<Reservation> reservationPage = reservationRepository.findByUserOrderByCreatedAtDesc(user, pageable);
-
 		// モデルに予約情報を追加
-		model.addAttribute("reservationPage", reservationPage);
+		model.addAttribute("reservationPage", reservationService.getPage(user, pageable));
 
 		// 予約一覧ページを表示
 		return "reservations/index";
@@ -154,6 +151,14 @@ public class ReservationController {
 	public String create(@ModelAttribute ReservationRegisterForm reservationRegisterForm) {
 		// サービスを通じて予約を作成
 		reservationService.create(reservationRegisterForm);
+
+		// 予約完了後、予約一覧ページにリダイレクト
+		return "redirect:/reservations?reserved";
+	}
+
+	@GetMapping("/reservations/cancel/{id}")
+	public String reservationCancel(@PathVariable Integer id){
+
 
 		// 予約完了後、予約一覧ページにリダイレクト
 		return "redirect:/reservations?reserved";
