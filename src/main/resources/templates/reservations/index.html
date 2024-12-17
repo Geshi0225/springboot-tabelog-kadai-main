@@ -37,19 +37,30 @@
 									<th scope="col">店舗名</th>
 									<th scope="col">予約日</th>
 									<th scope="col">人数</th>
+									<th scope="col">予約状況</th>
+									<th scope="col"></th> <!-- ボタン用の空の列 -->
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each="reservation : ${reservationPage}">
 									<td>
 										<a th:href="@{/restaurants/__${reservation.getRestaurant().getId()}__}"
-											th:text="${reservation.getRestaurant().getName()}"></a>
+										   th:text="${reservation.getRestaurant().getName()}"></a>
 									</td>
 									<td th:text="${reservation.getReservationDate()}"></td>
 									<td th:text="${reservation.getNumberOfPeople + '名'}"></td>
+									<td th:text="${reservation.getStatus().getStatusName()}"></td>
+									<td>
+										<a th:if="${reservation.getStatus().getId() == 1}"
+										   th:href="@{/reservations/cancel/{id}(id=${reservation.getId()})}"
+										   class="btn btn-danger btn-sm">
+											キャンセル
+										</a>
+									</td>
 								</tr>
 							</tbody>
 						</table>
+
 
 						<!-- ページネーション -->
 						<div th:if="${reservationPage.getTotalPages() > 1}" class="d-flex justify-content-center">
