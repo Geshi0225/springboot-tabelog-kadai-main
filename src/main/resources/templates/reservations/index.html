@@ -54,7 +54,7 @@
 										<td th:text="${reservation.getNumberOfPeople + '名'}"></td>
 										<td th:text="${reservation.getStatus().getStatusName()}"></td>
 										<td>
-											<a th:if="${reservation.status.id == 1}"
+											<a th:if="${reservation.status.id == 1 and reservation.reservationDate >= T(java.time.LocalDate).now()}"
 												th:href="@{/reservations/cancel/{reservationId}/{restaurantId}/{userId}(reservationId=${reservation.id}, restaurantId=${reservation.restaurant.id}, userId=${reservation.user.id})}"
 												class="btn btn-danger btn-sm">
 												キャンセル
