@@ -1,0 +1,51 @@
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Eclipse
+.project
+.classpath
+.settings
+
+# Idea
+.idea
+*.iml
+*.iws
+*.ipr
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Gradle
+.gradle
+!gradle-wrapper.jar
+
+# Maven
+target
+
+# Build
+out
+build
+bin
+
+# Other
+*.log
+*.swp
+*.bak
+
+/target/
+/logs/
+*.log
+.classpath
+.project
+.settings/
+.idea/
+*.iml
+*.class
+src/main/resources/application-development.properties
+src/main/resources/application-local.properties
+src/main/resources/application.properties
+*.properties
