@@ -66,4 +66,14 @@ public class ReservationService {
 	public boolean isWithinSeats(Integer numberOfPeople, Integer seats) {
 		return numberOfPeople <= seats;
 	}
+
+    public void cancelReservation(Integer reservationId, Integer restaurantId, Integer userId) {
+		Reservation reservation = reservationRepository.getReferenceById(reservationId);
+		var reservationStatus = reservationStatusRepository.findById(STATUS_CANCELLED);
+
+		reservation.setStatus(reservationStatus.get());
+
+		// 予約情報をデータベースに保存
+		reservationRepository.save(reservation);
+    }
 }

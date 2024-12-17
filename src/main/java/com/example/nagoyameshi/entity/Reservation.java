@@ -61,4 +61,19 @@ public class Reservation {
 		this.reservationDate = date;
 		this.numberOfPeople = numberOfPeople;
 	}
+
+	public Reservation(
+			Integer id,
+			Restaurant restaurant,
+			User user,
+			ReservationStatus status,
+			LocalDate date,
+			Integer numberOfPeople) {
+		this.id = id;
+		this.restaurant = restaurant;
+		this.user = user;
+		this.status = status;
+		this.reservationDate = date;
+		this.numberOfPeople = numberOfPeople;
+	}
 }

@@ -148,17 +148,26 @@ public class ReservationController {
 
 	// 予約作成処理を行うメソッド
 	@PostMapping("/restaurants/{id}/reservations/create")
-	public String create(@ModelAttribute ReservationRegisterForm reservationRegisterForm) {
+	public String create(@ModelAttribute ReservationRegisterForm reservationRegisterForm,
+			RedirectAttributes redirectAttribute) {
 		// サービスを通じて予約を作成
 		reservationService.create(reservationRegisterForm);
+		redirectAttribute.addFlashAttribute("successMessage", "予約が完了しました。");
 
 		// 予約完了後、予約一覧ページにリダイレクト
 		return "redirect:/reservations?reserved";
 	}
 
-	@GetMapping("/reservations/cancel/{id}")
-	public String reservationCancel(@PathVariable Integer id){
+	@GetMapping("/reservations/cancel/{reservationId}/{restaurantId}/{userId}")
+	public String reservationCancel(
+			@PathVariable Integer reservationId,
+			@PathVariable Integer restaurantId,
+			@PathVariable Integer userId,
+			RedirectAttributes redirectAttribute) {
 
+		reservationService.cancelReservation(reservationId, restaurantId, userId);
+
+		redirectAttribute.addFlashAttribute("successMessage", "予約をキャンセルしました。");
 
 		// 予約完了後、予約一覧ページにリダイレクト
 		return "redirect:/reservations?reserved";
