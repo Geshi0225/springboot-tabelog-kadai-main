@@ -30,6 +30,10 @@ public class Reservation {
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@ManyToOne
+	@JoinColumn(name = "status_id")
+	private ReservationStatuses status;
+
 	@Column(name = "number_of_people")
 	private Integer numberOfPeople;
 
