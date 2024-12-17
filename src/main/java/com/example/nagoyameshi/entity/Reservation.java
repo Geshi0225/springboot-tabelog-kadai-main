@@ -45,4 +45,14 @@ public class Reservation {
 
 	@Column(name = "updated_at", insertable = false, updatable = false)
 	private Timestamp updatedAt;
+
+	public Reservation() {
+	}
+
+	public Reservation(Restaurant restaurant, User user, LocalDate date, Integer numberOfPeople) {
+		this.restaurant = restaurant;
+		this.user = user;
+		this.reservationDate = date;
+		this.numberOfPeople = numberOfPeople;
+	}
 }

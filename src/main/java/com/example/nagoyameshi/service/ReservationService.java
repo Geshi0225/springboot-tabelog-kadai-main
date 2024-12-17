@@ -15,7 +15,11 @@ import com.example.nagoyameshi.repository.UserRepository;
 
 @Service
 public class ReservationService {
-	// 予約情報をデータベースに登録
+
+    // 「予約済み」と「キャンセル済み」のステータスIDを定数として宣言
+    private static final Integer STATUS_RESERVED = 1;
+    private static final Integer STATUS_CANCELLED = 2;
+
 	private final ReservationRepository reservationRepository;
 	private final RestaurantRepository restaurantRepository;
 	private final UserRepository userRepository;
@@ -29,16 +33,20 @@ public class ReservationService {
 
 	@Transactional
 	public void create(ReservationRegisterForm reservationRegisterForm) {
-		Reservation reservation = new Reservation();
+		// レストランとユーザーの参照を取得
 		Restaurant restaurant = restaurantRepository.getReferenceById(reservationRegisterForm.getRestaurantId());
 		User user = userRepository.getReferenceById(reservationRegisterForm.getUserId());
-		LocalDate reservationDate = LocalDate.parse(reservationRegisterForm.getReservationDate());
 
-		reservation.setRestaurant(restaurant);
-		reservation.setUser(user);
-		reservation.setReservationDate(reservationDate);
-		reservation.setNumberOfPeople(reservationRegisterForm.getNumberOfPeople());
 
+		// 新しい予約エンティティを作成（コンストラクタを利用）
+		Reservation reservation = new Reservation(
+			restaurant,
+			user,
+			LocalDate.parse(reservationRegisterForm.getReservationDate()),
+			reservationRegisterForm.getNumberOfPeople()
+		);
+
+		// 予約情報をデータベースに保存
 		reservationRepository.save(reservation);
 	}
 
