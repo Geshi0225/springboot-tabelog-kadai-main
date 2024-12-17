@@ -32,7 +32,7 @@ public class Reservation {
 
 	@ManyToOne
 	@JoinColumn(name = "status_id")
-	private ReservationStatuses status;
+	private ReservationStatus status;
 
 	@Column(name = "number_of_people")
 	private Integer numberOfPeople;
