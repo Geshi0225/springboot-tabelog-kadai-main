@@ -49,9 +49,15 @@ public class Reservation {
 	public Reservation() {
 	}
 
-	public Reservation(Restaurant restaurant, User user, LocalDate date, Integer numberOfPeople) {
+	public Reservation(
+			Restaurant restaurant,
+			User user,
+			ReservationStatus status,
+			LocalDate date,
+			Integer numberOfPeople) {
 		this.restaurant = restaurant;
 		this.user = user;
+		this.status = status;
 		this.reservationDate = date;
 		this.numberOfPeople = numberOfPeople;
 	}
