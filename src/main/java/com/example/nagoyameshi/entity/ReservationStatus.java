@@ -18,5 +18,5 @@ public class ReservationStatus {
 	private Integer id;
 
 	@Column(name = "status_name")
-	private String  name;
+	private String  statusName;
 }
